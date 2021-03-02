@@ -1,11 +1,23 @@
-import flask
+from flask import Flask, request, render_template
+from flask_restful import Resource, Api
 
-app = flask.Flask("__main__")
+
+app = Flask(__name__)
+api = Api(app)
+
+
+class Get_Stocks(Resource):
+    def get(self):
+        return {"TYPE": "request"}
 
 
 @app.route("/")
-def my_index():
-    return flask.render_template("index.html", token="Hello React")
+def index():
+    return render_template("index.html", token="Hello React")
 
 
-app.run(debug=True)
+api.add_resource(Get_Stocks, "/apis")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
