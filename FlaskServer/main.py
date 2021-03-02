@@ -7,8 +7,8 @@ api = Api(app)
 
 
 class Get_Articles(Resource):
-    def get(self):
-        return get_articles()
+    def get(self, organization):
+        return get_articles(organization)
 
 
 @app.route("/")
@@ -16,7 +16,7 @@ def index():
     return render_template("index.html", token="Hello React")
 
 
-api.add_resource(Get_Articles, "/api")
+api.add_resource(Get_Articles, "/api/<string:organization>")
 
 
 if __name__ == "__main__":
